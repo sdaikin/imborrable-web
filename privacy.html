@@ -4,55 +4,117 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Política de Privacidad — MEMORIZE</title>
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  body{background:#0a0a0a;color:#e5e5e5;font-family:-apple-system,system-ui,sans-serif;margin:0;padding:0;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 60px}
-  .logo{font-size:24px;font-weight:900;background:linear-gradient(135deg,#f97316,#ea580c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;padding:18px 0 4px;letter-spacing:4px}
-  h1{font-size:20px;color:#ffffff;margin:24px 0 8px}
-  h2{font-size:15px;color:#f97316;margin:20px 0 6px}
-  p,li{font-size:14px;line-height:1.6;color:#d4d4d4}
-  ul{padding-left:20px}
-  .fecha{text-align:center;color:#737373;font-size:12px;margin-bottom:24px}
-  .tag{display:inline-block;background:rgba(249,115,22,0.12);border:1px solid #f97316;color:#f97316;border-radius:8px;padding:2px 10px;font-size:12px;font-weight:700;margin-bottom:16px}
+  :root{
+    --bg:#050508; --surface:#101018; --surface2:#161622;
+    --border:#23233a; --ink:#f5f5ff; --muted:#9a9ab5; --dim:#6a6a85;
+    --accent:#f97316; --accent2:#fb923c; --accent3:#ff5e00;
+    --radius:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  h1,h2,.logo{font-family:'Space Grotesk',sans-serif}
+  .aurora{position:fixed;z-index:0;pointer-events:none;filter:blur(100px);opacity:.4;border-radius:50%}
+  .a1{width:420px;height:420px;background:radial-gradient(circle,rgba(249,115,22,.5),transparent 70%);top:-100px;right:-100px;animation:drift 18s ease-in-out infinite alternate}
+  .a2{width:380px;height:380px;background:radial-gradient(circle,rgba(120,80,255,.35),transparent 70%);bottom:-80px;left:-80px;animation:drift 22s ease-in-out infinite alternate-reverse}
+  @keyframes drift{from{transform:translate(0,0)}to{transform:translate(50px,30px)}}
+  .wrap{max-width:720px;margin:0 auto;padding:40px 22px 80px;position:relative;z-index:1}
+  .top{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--border);margin-bottom:36px}
+  .logo{font-size:20px;font-weight:700;letter-spacing:3px;background:linear-gradient(135deg,#f97316,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}
+  .top a.back{color:var(--muted);text-decoration:none;font-size:14px}
+  .top a.back:hover{color:var(--accent)}
+  h1{font-size:28px;margin-bottom:6px}
+  .fecha{color:var(--dim);font-size:13px;margin-bottom:20px}
+  .tag{display:inline-block;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.4);color:var(--accent);border-radius:999px;padding:6px 16px;font-size:13px;font-weight:600;margin-bottom:28px;animation:pulso 3s ease-in-out infinite}
+  @keyframes pulso{0%,100%{box-shadow:0 0 0 rgba(249,115,22,0)}50%{box-shadow:0 0 20px rgba(249,115,22,.25)}}
+  h2{font-size:17px;color:#fff;margin:30px 0 10px;display:flex;align-items:center;gap:10px}
+  h2::before{content:"";width:6px;height:20px;border-radius:3px;background:linear-gradient(180deg,var(--accent),var(--accent3));display:inline-block}
+  p,li{font-size:14.5px;color:var(--muted)}
+  ul{padding-left:22px;margin-top:8px}
+  li{margin-bottom:6px}
+  li::marker{color:var(--accent)}
+  b{color:var(--ink)}
+  .card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-top:14px;backdrop-filter:blur(8px)}
+  footer{margin-top:44px;padding-top:24px;border-top:1px solid var(--border);text-align:center;color:var(--dim);font-size:13px}
+  footer a{color:var(--accent);text-decoration:none}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
+<div class="aurora a1"></div><div class="aurora a2"></div>
 <div class="wrap">
-  <div class="logo">MEMORIZE</div>
-  <p class="fecha">Última actualización: 22 de agosto de 2026</p>
+  <div class="top">
+    <a class="logo" href="index.html">MEMORIZE</a>
+    <a class="back" href="index.html">← Volver</a>
+  </div>
+
+  <h1>Política de Privacidad</h1>
+  <p class="fecha">Última actualización: 30 de agosto de 2026</p>
   <span class="tag">🔒 La app NO recopila ni transmite tus datos</span>
 
-  <h1>1. Resumen</h1>
-  <p>MEMORIZE es una aplicación de entrenamiento de memoria que funciona <b>100% en tu dispositivo</b>. No tiene servidores, no tiene cuentas de usuario, no te pide registro y <b>no envía ningún dato a internet</b>.</p>
+  <div class="card">
+    <h2>1. Resumen</h2>
+    <p>MEMORIZE es una aplicación de entrenamiento de memoria que funciona <b>100% en tu dispositivo</b>. No tiene servidores, no tiene cuentas de usuario, no te pide registro y <b>no envía ningún dato a internet</b>.</p>
+  </div>
 
-  <h1>2. Qué datos se guardan y dónde</h1>
-  <p>Toda la información que la app usa se almacena <b>localmente en tu dispositivo</b> (en el almacenamiento interno de la aplicación). Esto incluye:</p>
-  <ul>
-    <li>Tu progreso de práctica (estrellas, puntajes, bloques de ganchos dominados)</li>
-    <li>Los datos que <b>vos mismo ingresás</b> voluntariamente: contactos y caras para el módulo de Nombres, números de teléfono para el módulo de Teléfonos, vocabulario propio para Palabras Clave, y números guardados en el conversor</li>
-    <li>Preferencias de la app (cantidad de dígitos, velocidad, configuración)</li>
-  </ul>
-  <p>Estos datos <b>nunca salen de tu dispositivo</b>. No se suben a la nube, no se sincronizan, no se comparten.</p>
+  <div class="card">
+    <h2>2. Qué datos se guardan y dónde</h2>
+    <p>Toda la información que la app usa se almacena <b>localmente en tu dispositivo</b> (en el almacenamiento interno de la aplicación). Esto incluye:</p>
+    <ul>
+      <li>Tu progreso de práctica (estrellas, puntajes, bloques de ganchos dominados)</li>
+      <li>Los datos que <b>vos mismo ingresás</b> voluntariamente: contactos y caras para el módulo de Nombres, números de teléfono para el módulo de Teléfonos, vocabulario propio para Palabras Clave</li>
+      <li>Preferencias de la app (cantidad de dígitos, velocidad, configuración)</li>
+    </ul>
+    <p>Estos datos <b>nunca salen de tu dispositivo</b>. No se suben a la nube, no se sincronizan, no se comparten.</p>
+  </div>
 
-  <h1>3. Qué NO hacemos</h1>
-  <ul>
-    <li><b>No recopilamos</b> información personal, ubicación, contactos de tu agenda ni datos del dispositivo</li>
-    <li><b>No usamos</b> analíticas, rastreadores, cookies ni publicidad</li>
-    <li><b>No vendemos ni compartimos</b> datos con terceros — no hay datos para compartir</li>
-    <li><b>No tenemos</b> servidores ni cuentas: no hay nada que puedas hackear, filtrar o perder</li>
-  </ul>
+  <div class="card">
+    <h2>3. Qué NO hacemos</h2>
+    <ul>
+      <li><b>No recopilamos</b> información personal, ubicación, contactos de tu agenda ni datos del dispositivo</li>
+      <li><b>No usamos</b> analíticas, rastreadores, cookies ni publicidad</li>
+      <li><b>No vendemos ni compartimos</b> datos con terceros — no hay datos para compartir</li>
+      <li><b>No tenemos</b> servidores ni cuentas: no hay nada que puedas hackear, filtrar o perder</li>
+    </ul>
+  </div>
 
-  <h1>4. Menores de edad</h1>
-  <p>La app es apta para todas las edades y no recopila información personal de nadie, incluidos menores. No requiere cuenta ni permiso de un adulto para usarse.</p>
+  <div class="card">
+    <h2>4. Permisos</h2>
+    <p>La app puede solicitar acceso a la <b>cámara o galería únicamente si vos lo decidís</b>, para crear tus propios ganchos visuales. Estas imágenes se guardan localmente y nunca se suben a ningún servidor.</p>
+  </div>
 
-  <h1>5. Seguridad</h1>
-  <p>Como tus datos viven solo en tu dispositivo, están protegidos por el sistema operativo (iOS/Android). Nadie más puede acceder a ellos. Si desinstalás la app o borrás sus datos, toda la información se elimina de forma permanente.</p>
+  <div class="card">
+    <h2>5. Compras dentro de la app</h2>
+    <p>Las suscripciones y compras se procesan exclusivamente a través de las tiendas oficiales (Google Play o App Store). MEMORIZE no recibe ni almacena datos de pago; el procesamiento lo hace la tienda bajo sus propias políticas de privacidad.</p>
+  </div>
 
-  <h1>6. Cambios en esta política</h1>
-  <p>Si en el futuro la app llegara a recopilar datos (por ejemplo, al agregar sincronización opcional), esta política se actualizará con antelación y se indicará la fecha de la última revisión en esta página.</p>
+  <div class="card">
+    <h2>6. Menores de edad</h2>
+    <p>La app es apta para todas las edades y no recopila información personal de nadie, incluidos menores. No requiere cuenta ni permiso de un adulto para usarse.</p>
+  </div>
 
-  <h1>7. Contacto</h1>
-  <p>Si tenés preguntas sobre esta política o sobre la app, escribinos a: <b>sleyer90@hotmail.com</b></p>
+  <div class="card">
+    <h2>7. Seguridad y eliminación de datos</h2>
+    <p>Como tus datos viven solo en tu dispositivo, están protegidos por el sistema operativo (iOS/Android). Para eliminar todo: desinstalá la app o usá la opción <b>«REINICIAR PROGRESO»</b> en la configuración. No existe ningún dato en servidores externos que necesite eliminación.</p>
+  </div>
+
+  <div class="card">
+    <h2>8. Cambios en esta política</h2>
+    <p>Si en el futuro la app llegara a recopilar datos (por ejemplo, al agregar sincronización opcional), esta política se actualizará con antelación y se indicará la fecha de la última revisión en esta página.</p>
+  </div>
+
+  <div class="card">
+    <h2>9. Contacto</h2>
+    <p>Si tenés preguntas sobre esta política o sobre la app, escribinos a: <b>sleyer90@hotmail.com</b></p>
+  </div>
+
+  <footer>
+    <p>© 2026 MEMORIZE · <a href="index.html">Volver al inicio</a></p>
+  </footer>
 </div>
 </body>
 </html>
