@@ -540,6 +540,30 @@
   </div>
 </footer>
 
+<script>
+/* Respaldo de imagen. El evento "error" no se dispara cuando falla una fuente WebP dentro de <picture>,
+   asi que se revisa si la imagen termino de cargar y quedo vacia (naturalWidth 0): en ese caso se quita
+   la fuente WebP y se recarga el JPEG, que funciona en cualquier telefono. */
+(function () {
+  function alRespaldo(img) {
+    if (img.dataset.respaldo) return;
+    img.dataset.respaldo = '1';
+    var jpg = img.getAttribute('src');
+    var pic = img.closest('picture');
+    if (pic) pic.querySelectorAll('source').forEach(function (s) { s.remove(); });
+    img.removeAttribute('src');
+    img.src = jpg;
+  }
+  function revisar(img) {
+    if (img.complete && img.naturalWidth === 0) alRespaldo(img);
+  }
+  document.querySelectorAll('picture img').forEach(function (img) {
+    img.addEventListener('error', function () { alRespaldo(img); });
+    img.addEventListener('load', function () { revisar(img); });
+    [1500, 4000, 8000].forEach(function (ms) { setTimeout(function () { revisar(img); }, ms); });
+  });
+})();
+</script>
 <script type="module">
 /* Movimiento real de la pagina, con Motion (ex Framer Motion) + canvas + interacciones de mouse.
    Reglas del pack UI/UX Pro Max que se respetan: preferencias de movimiento del usuario, revelados de
