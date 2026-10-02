@@ -154,10 +154,12 @@
   .shot figcaption{font-size:13px;color:var(--dim);text-align:center;margin-top:11px}
   .avance{height:3px;background:var(--border);border-radius:99px;margin:26px auto 0;max-width:280px;overflow:hidden}
   .avance i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-soft));border-radius:99px}
-  @media(max-width:900px){
+  /* La galeria se mueve con el scroll SOLO en computadoras con mouse. En cualquier pantalla tactil
+     (aunque tenga 980px de ancho por el "modo escritorio"), se usa el deslizamiento normal. */
+  @media (max-width:900px), (pointer: coarse){
     .galeria{height:auto;padding:88px 0}
-    .galeria .pegajoso{position:static;height:auto;display:block}
-    .pista-fotos{overflow-x:auto;padding:8px 22px 22px;scroll-snap-type:x mandatory;width:auto}
+    .galeria .pegajoso{position:static;height:auto;display:block;overflow:visible}
+    .pista-fotos{overflow-x:auto;padding:8px 22px 22px;scroll-snap-type:x mandatory;width:auto;transform:none!important}
     .shot{width:216px;scroll-snap-align:center}
     .avance{display:none}
   }
@@ -573,6 +575,9 @@ const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (reduce) {
   document.documentElement.classList.add('no-motion');
 } else {
+  // con mouse hay cursor (inclinacion, botones magneticos y paralaje); en pantallas tactiles, no
+  const punteroFino = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
   /* ---------- 1. FONDO: red de nodos que reacciona al mouse ---------- */
   (() => {
     const c = document.querySelector('#bg');
@@ -650,7 +655,7 @@ if (reduce) {
     });
 
     const tel = document.querySelector('[data-parallax]');
-    if (tel && innerWidth > 940) scroll(animate(tel, { y: [0, -46] }));
+    if (tel && punteroFino && innerWidth > 940) scroll(animate(tel, { y: [0, -46] }));
 
     document.querySelectorAll('[data-count]').forEach((el) => {
       const fin = Number(el.dataset.count);
@@ -683,6 +688,7 @@ if (reduce) {
   // 4a. tarjetas y telefono que se inclinan siguiendo el cursor, con luz que sigue al puntero
   const MÁX = 7;
   document.querySelectorAll('[data-inclinable]').forEach((el) => {
+    if (!punteroFino) return;
     const esFono = el.classList.contains('device');
     const fuerza = esFono ? 9 : MÁX;
     const mover = (e) => {
@@ -725,8 +731,10 @@ if (reduce) {
     const avance = document.querySelector('[data-avance]');
     if (!seccion || !pista) return;
     let objetivo = 0, actual = 0, activo = false;
+    // solo con mouse: el modo "scroll vertical mueve la tira" no tiene sentido en pantallas tactiles
+    const modoMouse = window.matchMedia('(min-width: 901px) and (hover: hover) and (pointer: fine)');
     const medir = () => {
-      activo = innerWidth > 900;
+      activo = modoMouse.matches;
       if (!activo) { pista.style.transform = ''; if (avance) avance.style.width = '0'; return; }
       const r = seccion.getBoundingClientRect();
       const recorrido = seccion.offsetHeight - innerHeight;
@@ -737,6 +745,8 @@ if (reduce) {
     };
     addEventListener('scroll', medir, { passive: true });
     addEventListener('resize', medir);
+    addEventListener('orientationchange', medir);
+    modoMouse.addEventListener('change', medir);
     medir();
     const animar = () => {
       if (activo) {
